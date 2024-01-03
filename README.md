@@ -18,3 +18,10 @@ YT pays a lot more compared to other platforms so even if the short does not per
 4. the reel will then be uploaded to your YT shorts account
 5. `$$$`
 
+
+## References
+
+- Telegram bot: https://core.telegram.org/bots/api
+- Instagram downloader:https://github.com/instaloader/instaloader
+- Youtube upload api: https://developers.google.com/youtube/v3/guides/uploading_a_video
+
