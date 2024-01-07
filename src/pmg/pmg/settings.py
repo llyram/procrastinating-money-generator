@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-$-@gdsjlu^)r*t+gzkcjj&&u3+82xs@^sqnnrfac2l&g%nbtvk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['maryllcastelino.pythonanywhere.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'instatoyt'
+    'instatoyt',
+    'telegrambot',
 ]
 
 MIDDLEWARE = [

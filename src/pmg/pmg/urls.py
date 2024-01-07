@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('telegrambot/', include('telegrambot.urls')),
     path('api/', include('instatoyt.urls')),
     path('admin/', admin.site.urls),
 ]
