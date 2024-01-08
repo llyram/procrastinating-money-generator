@@ -33,7 +33,4 @@ class ReelViewSet(viewsets.ModelViewSet):
         post = Post.from_shortcode(L.context, SHORTCODE)
         L.download_post(post, target='current_reel')
 
-        self.uploadToYT()
-    
-    def uploadToYT(self):
-        pass
+        # self.uploadToYT()

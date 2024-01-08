@@ -34,14 +34,33 @@ def handle_update(update):
   if match:
     reel_id = match.group(1)
     print("Reel ID:", reel_id)
+    send_message("sendMessage", {
+      'chat_id': chat_id,
+      'text': f'Instagram reel detected {reel_id}. Uploading to YT$'
+    })
+    response = call_yt_upload_api(reel_id)
+    print(f"response: {response}")
   else:
     print("Reel ID not found in the URL.")
-
-  send_message("sendMessage", {
-    'chat_id': chat_id,
-    'text': f'you said {text}'
-  })
+    send_message("sendMessage", {
+      'chat_id': chat_id,
+      'text': f'This is not a instagram reel link'
+    })
 
 def setwebhook(request):
-  response = requests.post(TELEGRAM_API_URL+ "setWebhook?url=" + URL).json()
+  response = requests.post(TELEGRAM_API_URL+ "setWebhook?url=" + URL + "/telegrambot/getpost/").json()
   return HttpResponse(f"{response}")
+
+def call_yt_upload_api(reel_id):
+  # Implement the logic to call the other API using the reel_id
+  other_api_url = URL + '/api/reel/'
+  payload = {'reel_id': reel_id}
+
+  response = requests.post(other_api_url, json=payload)
+  print(f"response: {response}")
+  # Check the response status and handle accordingly
+  if response.status_code == 201:
+      return response.json()
+  else:
+      # Handle errors or raise an exception
+      response.raise_for_status()

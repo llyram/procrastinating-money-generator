@@ -90,3 +90,8 @@ db.sqlite3
 
 # python environment
 venv
+
+# credentials file
+credentials.py
+
+client_secrets.json
