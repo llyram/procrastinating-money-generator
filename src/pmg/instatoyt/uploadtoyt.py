@@ -42,6 +42,14 @@ def get_authenticated_service():
     if credentials is None or credentials.invalid:
         credentials = run_flow(flow, storage)
 
+    # Check if the access token is expired
+    if credentials.access_token_expired:
+        # Refresh the access token using the refresh token
+        credentials.refresh(httplib2.Http())
+
+        # Save the refreshed credentials back to the storage
+        storage.put(credentials)
+
     return build(
         YOUTUBE_API_SERVICE_NAME,
         YOUTUBE_API_VERSION,

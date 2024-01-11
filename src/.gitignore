@@ -95,3 +95,7 @@ venv
 credentials.py
 
 client_secrets.json
+
+pmg/current_reel/*
+
+oauth2.json
