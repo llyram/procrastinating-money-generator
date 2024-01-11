@@ -38,8 +38,8 @@ class ReelViewSet(viewsets.ModelViewSet):
 
         file_path = "current_reel/reels.mp4"
         title_path = "current_reel/reels.txt"
-        title = ""
-        description = ""
+        title = None
+        description = None
         if os.path.isfile(title_path):
             try:
                 with open(title_path, 'r') as file:
@@ -55,7 +55,10 @@ class ReelViewSet(viewsets.ModelViewSet):
         category = "22"
         keywords = "keyword1,keyword2"
         privacy_status = "private"
-        upload_youtube_video(file_path, title, description, category, keywords, privacy_status)
+        try:
+            upload_youtube_video(file_path, title, description, category, keywords, privacy_status)
+        except Exception as e:
+            print(f"File could not be uploaded\n\n {e}")
 
         # Create a new instance of Reel with the provided string parameter
         instance = Reel(**request.data)
