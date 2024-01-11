@@ -58,6 +58,7 @@ def get_authenticated_service():
 
 
 def upload_youtube_video(file_path, title="Test Title", description="Test Description", category="22", keywords="", privacy_status="public"):
+    print("current working directory ", os.getcwd())
     youtube = get_authenticated_service()
 
     if not os.path.exists(file_path):
