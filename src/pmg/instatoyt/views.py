@@ -57,16 +57,18 @@ class ReelViewSet(viewsets.ModelViewSet):
         privacy_status = "private"
         try:
             upload_youtube_video(file_path, title, description, category, keywords, privacy_status)
+            # Create a new instance of Reel with the provided string parameter
+            instance = Reel(**request.data)
+            instance.save()
+
+            serializer = self.get_serializer(instance)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=201, headers=headers)
         except Exception as e:
             print(f"File could not be uploaded\n\n {e}")
+            return Response(status=400)
 
-        # Create a new instance of Reel with the provided string parameter
-        instance = Reel(**request.data)
-        instance.save()
-
-        serializer = self.get_serializer(instance)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=201, headers=headers)
+        
     
     def downloadReel(self, SHORTCODE):
         # Get instance

@@ -40,6 +40,19 @@ def handle_update(update):
     })
     response = call_yt_upload_api(reel_id)
     print(f"response: {response}")
+
+    if response["successful"]:
+      send_message("sendMessage", {
+        'chat_id': chat_id,
+        'text': f'Reel uploaded successfully ✅'
+      })
+    else:
+      send_message("sendMessage", {
+        'chat_id': chat_id,
+        'text': f'The Reel failed to upload ⚠️'
+      })
+
+
   else:
     print("Reel ID not found in the URL.")
     send_message("sendMessage", {
@@ -58,9 +71,9 @@ def call_yt_upload_api(reel_id):
 
   response = requests.post(other_api_url, json=payload)
   print(f"response: {response}")
+
   # Check the response status and handle accordingly
   if response.status_code == 201:
-      return response.json()
+      return {"successful":True}
   else:
-      # Handle errors or raise an exception
-      response.raise_for_status()
+      return {"successful": False}
